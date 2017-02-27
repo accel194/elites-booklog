@@ -16,10 +16,9 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
-# Should Matcher
+#Should Matcher
 require 'shoulda/matchers'
-# FactoryGirl
+#FactoryGirl
 require 'factory_girl_rails'
 
 RSpec.configure do |config|
@@ -102,10 +101,9 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
-
-# FactoryGirl 接頭辞除去
+# FactoryGirl接頭辞除去
 config.include FactoryGirl::Syntax::Methods
-# Shoulda matchers
+#Shoulda matchers
 config.include Shoulda::Matchers
 config.include Shoulda::Matchers::ActiveModel
 end
