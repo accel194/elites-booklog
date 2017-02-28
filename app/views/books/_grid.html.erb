@@ -4,13 +4,15 @@
   <li class="grid">
     
     <% if book %>
-    <div class="image">
-      <% if book.image? %>
-       <%= image_tag book.image.url %>
-      <% else %>
-        <div class="empty">No image</div>
-      <% end %>
-    </div>
+      <%= link_to book_path(book.id) do %>
+      <div class="image">
+        <% if book.image? %>
+         <%= image_tag book.image.url %>
+        <% else %>
+          <div class="empty">No image</div>
+        <% end %>
+      </div>
+    <% end %>
     <div class="title">
       <%= book.title %>
     </div>
@@ -21,5 +23,4 @@
       <%= render 'books/social_buttons', url: book_url(book.id) %>
     </div>
   <% end %>
-  
   </li>
