@@ -3,9 +3,23 @@
   
   <hr>
   
+  <div class="header">
+    <%= @book.title %>
+  </div>
+  
   <div class="bookmark_and_social clearfix">
     <%= render 'books/social_buttons', url: request.url %>
+    <% if user_signed_in? %>
+      <div class="bookmark">
+        <% if @my_bookmark %>
+          <%= button_to 'ブックマーク解除', bookmark_path(@my_bookmark.id), method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <%= button_to 'ブックマーク', bookmarks_path(bookmark: {book_id: @book.id}), class: 'btn btn-primary' %>
+       <% end %>
+      </div>
+    <% end %>
   </div>
+  
   <% if user_signed_in? && @book.user_id == current_user.id %>
     <div class="edit clearfix">
       <div class="button_wrapper">
@@ -41,8 +55,17 @@
         <%= label :book, :price %>: ¥<%= @book.price.to_s(:delimited) %>
       </div>
       
+      <div class="publish_date">
+        <%= label :book, :publish_date %>: <%= @book.publish_date.strftime('%Y年%m月%d日') %>
+      </div>
+      
       <div class="caption">
         <%= label :book, :caption %>: <%= @book.caption %>
+      </div>
+      <div class="info">
+        <div class="bookmark">
+          <%= @book.bookmarks.length %>
+        </div>
       </div>
     </div>
   </div>
