@@ -8,9 +8,9 @@ class BooksController < ApplicationController
     if user_signed_in? && params[:ft] && params[:ft] == 'my'
       @books = Book.includes(:bookmarks, :reviews, :user).where(user_id: current_user.id).order('updated_at DESC')
     elsif user_signed_in? && params[:ft] && params[:ft] == 'bookmark'
-      @books = Book.joins(:bookmarks).where('bookmarks.user_id = ?', current_user.id).order('update_at DESC')
+      @books = Book.joins(:bookmarks).where('bookmarks.user_id = ?', current_user.id).order('updated_at DESC')
     else
-      @books = Book.includes(:bookmarks, :reviews, :user).order('update_at DESC')
+      @books = Book.includes(:bookmarks, :reviews, :user).order('updated_at DESC')
     end
   end
   
