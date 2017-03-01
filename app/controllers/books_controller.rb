@@ -4,13 +4,19 @@ class BooksController < ApplicationController
   
   def index
     #@books = Book.order('updated_at DESC')
-    @books = Book.includes(:bookmarks).order('updated_at DESC')
+    @books = Book.includes(:bookmarks, :reviews).order('updated_at DESC')
   end
   
   def show
     @book = Book.find(params[:id])
     if user_signed_in?
       @my_bookmark = @book.bookmarks.select{|s| s.user_id == current_user.id}.first
+    end
+    if user_signed_in?
+      my_review = @book.reviews.select{|s| s.user_id == current_user.id}.first
+      unless my_review
+        @my_review = Review.new
+      end
     end
   end
   
